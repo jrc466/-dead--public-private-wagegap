@@ -33,6 +33,7 @@ sample[,schooling := as.numeric(schooling)]
 sample[,low_skill:= ifelse(schooling<7,1,0)] # some high school or less
 sample[,med_skill:= ifelse(schooling>=7 & schooling<=8,1,0)] # high school and some college
 sample[,high_skill:= ifelse(schooling>=9,1,0)] # college and up, including grad
+sample[,skill:= ifelse(high_skill==1,3,ifelse(med_skill==1,2,1))]
 
 # Inserting ppp
 setwd(metadata.dir)

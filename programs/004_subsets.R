@@ -26,7 +26,7 @@ sample[,prime_age:=ifelse(age1>= 25 & age1<=54,1,0)]
 sample[,nsex:=uniqueN(sex),.(pis)]
 sample[,nrace:=uniqueN(nonwhite),.(pis)]
 ### keeping mode sex
-getmode = function(x){u = unique(x)
+getmode = function(x){u = unique(x[!is.na(x)])
                       return(u[which.max(tabulate(match(x, u)))])}
 sample[,sex1:=getmode(sex),.(pis)]
 sample[,nonwhite1:=getmode(nonwhite),.(pis)]

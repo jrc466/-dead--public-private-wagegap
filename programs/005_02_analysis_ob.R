@@ -9,10 +9,7 @@ source("config.R", echo = T)
 
 # Loading packages
 library(data.table)
-library(Counterfactual)
 library(lfe)
-library(stargazer)
-library(ggplot2)
 library(oaxaca)
 library(doParallel)
 library(foreach)
@@ -30,7 +27,7 @@ data = data[mean_earn!=0&hired_wage!=0]
 #########
 # 2.1 Oaxaca-Blinder decomposition per year
 #########
-
+setwd(analysis.dir)
 # Simple OB on whole sample
 ob00 = oaxaca(log(hwage1)~nonwhite1+sex1+med_skill+high_skill+tenure+I(tenure^2)+factor(yr)+factor(region)|group1,data=data,R=100,na.action=na.omit)
 prov = list(ob00$twofold$overall,ob00$y)

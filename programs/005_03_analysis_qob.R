@@ -42,6 +42,7 @@ base.qob = function(x){
 
 #First, using the whole sample
 qob00 = base.qob(data)
+setwd(analysis.dir)
 save(qob00,file=paste("002_qob",suffix,".RData",sep=""))
 rm(qob00)
 

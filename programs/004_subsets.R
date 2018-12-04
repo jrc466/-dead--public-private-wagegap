@@ -31,13 +31,12 @@ getmode = function(x){u = unique(x[!is.na(x)])
 sample[,sex1:=getmode(sex),.(pis)]
 sample[,nonwhite1:=getmode(nonwhite),.(pis)]
 ## 4 - Excluding flagged observations
-sample = sample[!is.na(nonwhite)&prime_age==1&rural==0&tempo==0&firmID_type=="1"]
+sample = sample[yr!="2002"&prime_age==1&rural==0&tempo==0&firmID_type=="1"]
 ## 5 - Pis's with more than one job
 sample[,keep_job:=ifelse(max(mean_earn)==mean_earn,1,0),by=.(pis,yr)] # flagging main job as per highest monthly average
 sample = sample[keep_job==1] # keeping only main job
 # sample[,equal_pay:= length(unique(mean_earn)),.(pis,yr)] # all remaining duplicates have identical mean_earn
 sample = sample[sample[,.I[1],.(pis,yr)]$V1] # keep first row of combinations pis X yr where keep_job=1
-
 
 # Writing output
 output.name = paste("04_toanalysis",suffix,".csv",sep="")

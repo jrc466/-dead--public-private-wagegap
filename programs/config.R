@@ -15,7 +15,7 @@ debug = 1
 suffix = ifelse(debug == 1, "_debug","")
 
 # One percent sample
-onepc = 0
+onepc = 1
 suffix = ifelse(debug == 1 & onepc == 1, "_onepc",suffix)
 
 # No boot parameter

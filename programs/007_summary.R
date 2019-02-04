@@ -13,6 +13,8 @@ library(stargazer)
 library(ggplot2)
 library(ggpubr)
 library(arsenal)
+library(knitr)
+library(rmarkdown)
 
 # Reading sample
 setwd(output.dir)
@@ -40,28 +42,15 @@ data[!is.na(shifter),shifter_pc:=100*sum(shifter)/.N,.(yr)]
 data[,shifter:=factor(shifter,levels=c(0,1),labels=c("Non-shifter","Shifter"))]
 
 table001 = tableby(shifter~age1+tenure+sex1+nonwhite1+skill,data=data[tenure>=0],test=F,numeric.stats = c("meansd", "medianq1q3", "range", "Nmiss"))
-summary(table001, labelTranslations = labels,text = T)
+
+setwd(graphs.dir)
+capture.output(summary(table001, labelTranslations = labels,text = T),file="007_summary_switchers.Rmd")
+render("test.Rmd", pdf_document(keep_tex=T))
 
 #####
-# 0. Obtaining Summary Statistics of the data
+# 2. Obtaining Summary Statistics of the whole data
 #####
-controls <- tableby.control(
-  test = T,
-  total = T,
-  numeric.test = "kwt", cat.test = "chisq",
-  numeric.stats = c("meansd", "medianq1q3", "range", "Nmiss"),
-  cat.stats = c("countpct", "Nmiss"),
-  stats.labels = list(
-    meansd = "Mean (SD)",
-    medianq1q3 = "Median (Q1, Q3)",
-    range = "Min - Max",
-    Nmiss = "Missing"
-  )
-)
 
 table002 = tableby(group1~hwage1+age1+tenure+sex1+nonwhite1+skill,data=data[tenure>=0],test=F,numeric.stats = c("meansd", "medianq1q3", "range", "Nmiss"))
-summary(table002, labelTranslations = labels,text = "latex")
-
-save(table,file=paste(graphs.dir,"007_summary_onpc.RData",sep="/"))
-
-
+capture.output(summary(table002, labelTranslations = labels,text = T),file="007_summary_all.Rmd")
+render("test.Rmd", pdf_document(keep_tex=T))

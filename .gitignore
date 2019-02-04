@@ -9,4 +9,5 @@
 *.Rmd
 *.log
 *.md
+*.RData
 

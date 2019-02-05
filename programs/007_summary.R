@@ -31,7 +31,7 @@ data[,group1:=factor(group1,levels=c("0","1"),labels=c("Public","Private"))]
 data[,sex1:=factor(sex1,levels=c("0","1"),labels=c("Male","Female"))]
 data[,nonwhite1:=factor(nonwhite1,levels=c("0","1"),labels=c("White","Nonwhite"))]
 
-labels = list(hwage1 = "Hourly wage (2011 US$)",sex1="Gender",skill="Skill",nonwhite1="Race",age1="Age",tenure="Tenure")
+labels = list(hwage1 = "Hourly wage (2011 US$)",sex1="Gender",skill="Education",nonwhite1="Race",age1="Age",tenure="Tenure")
 
 #####
 # 1. Obtaining Summary Statistics for switchers in FE equation

@@ -6,3 +6,8 @@
 /sample
 /analysis_output
 *#
+*.Rmd
+*.log
+*.md
+*.RData
+

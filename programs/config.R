@@ -17,4 +17,9 @@ suffix = ifelse(debug == 1, "_debug","")
 # One percent sample
 onepc = 1
 suffix = ifelse(debug == 1 & onepc == 1, "_onepc",suffix)
-noboot = ifelse(debug == 1 & onepc == 0, TRUE,TRUE)
+
+# No boot parameter
+noboot = ifelse(debug == 1 & onepc == 0, FALSE,TRUE)
+
+# SE output suffix
+out.se = ifelse(noboot==FALSE,"_se","")
